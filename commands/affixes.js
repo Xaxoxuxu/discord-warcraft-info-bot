@@ -1,6 +1,6 @@
 'use strict';
 
-var https = require('https');
+const https = require('https');
 
 module.exports = {
     name: 'affixes',

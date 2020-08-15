@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const schedule = require('node-schedule');
 const fs = require('fs');
-const {prefix, token, general_id} = require('./config.json');
+const cfg = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -24,9 +24,14 @@ client.on('ready', () => {
 });
 
 schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 2}, function () {
-    client.channels.fetch(general_id).then(channel => {
-        channel.send('@everyone **10:00 THE FISH HAS BEEN PLEASED**');
-        fs.writeFile('./config.json', JSON.stringify(file, null, 2), function (err) {
+    client.channels.fetch(cfg.general_id).then(channel => {
+        let finalMsg = '@everyone **10:00 THE FISH HAS BEEN PLEASED**';
+
+        cfg.cloak_resistance += 3;
+        finalMsg += `**Ashjra\'kamas, Shroud of Resolve** corruption resistance cap: ** ${cfg.cloak_resistance} **`;
+
+        channel.send(finalMsg);
+        fs.writeFile('./config.json', JSON.stringify(cfg, null, 2), function (err) {
             if (err) {
                 return console.log(err);
             }
@@ -36,9 +41,9 @@ schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 2}, function () {
 });
 
 client.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(cfg.prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const args = message.content.slice(cfg.prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     // aliases block
@@ -56,7 +61,7 @@ client.on('message', message => {
         let reply = `You didn't provide any arguments, ${message.author}!`;
 
         if (command.usage) {
-            reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+            reply += `\nThe proper usage would be: \`${cfg.prefix}${command.name} ${command.usage}\``;
         }
 
         return message.channel.send(reply);
@@ -88,4 +93,4 @@ client.on('message', message => {
     }
 });
 
-client.login(token);
+client.login(cfg.token);
