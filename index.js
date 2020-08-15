@@ -25,7 +25,7 @@ client.on('ready', () => {
 
 schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 2}, function () {
     client.channels.fetch(cfg.general_id).then(channel => {
-        let finalMsg = '@everyone **10:00 THE FISH HAS BEEN PLEASED**';
+        let finalMsg = '@everyone **10:00 THE FISH HAS BEEN PLEASED**\n';
 
         cfg.cloak_resistance += 3;
         finalMsg += `**Ashjra\'kamas, Shroud of Resolve** corruption resistance cap: ** ${cfg.cloak_resistance} **`;
