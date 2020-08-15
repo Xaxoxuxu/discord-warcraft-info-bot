@@ -1,0 +1,16 @@
+{
+  "name": "informatora",
+  "version": "1.0.0",
+  "description": "A discord information bot",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.3.0",
+    "node-schedule": "^1.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "a.lyubchev",
+  "license": "ISC"
+}
