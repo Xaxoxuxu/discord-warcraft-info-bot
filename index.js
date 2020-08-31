@@ -53,7 +53,7 @@ client.on('message', message => {
 
     // guildOnly block
     if (command.guildOnly && message.channel.type === 'dm') {
-        return message.reply('I can\'t execute that command inside DMs!');
+        return message.reply("I can't execute that command inside DMs!");
     }
 
     // args and usage block
@@ -61,7 +61,7 @@ client.on('message', message => {
         let reply = `You didn't provide any arguments, ${message.author}!`;
 
         if (command.usage) {
-            reply += `\nThe proper usage would be: \`${cfg.prefix}${command.name} ${command.usage}\``;
+            reply += `\nThe proper usage would be: '${cfg.prefix}${command.name} ${command.usage}'`;
         }
 
         return message.channel.send(reply);
