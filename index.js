@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const schedule = require('node-schedule');
 const fs = require('fs');
-const cfg = require('./config.json');
+let cfg = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -23,7 +23,7 @@ client.on('ready', () => {
     console.log('I am ready!');
 });
 
-schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 2}, function () {
+schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 3}, function () {
     client.channels.fetch(cfg.general_id).then(channel => {
         let finalMsg = '@everyone **10:00 THE FISH HAS BEEN PLEASED**\n';
 
