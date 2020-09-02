@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 const schedule = require('node-schedule');
 const fs = require('fs');
-let cfg = require('./config.json');
+const cfg = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -27,16 +27,16 @@ schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 3}, function () {
     client.channels.fetch(cfg.general_id).then(channel => {
         let finalMsg = '@everyone **10:00 THE FISH HAS BEEN PLEASED**\n';
 
-        cfg.cloak_resistance += 3;
-        finalMsg += `**Ashjra\'kamas, Shroud of Resolve** corruption resistance cap: ** ${cfg.cloak_resistance} **`;
+        //cfg.cloak_resistance += 3;
+        finalMsg += `**Ashjra\'kamas, Shroud of Resolve** corruption resistance cap: ** ${cfg.cloak_resistance + 3} **`;
 
         channel.send(finalMsg);
-        fs.writeFile('./config.json', JSON.stringify(cfg, null, 2), function (err) {
+        /*fs.writeFile('./config.json', JSON.stringify(cfg, null, 2), function (err) {
             if (err) {
                 return console.log(err);
             }
             console.log("Cloak resistance updated!");
-        });
+        });*/
     });
 });
 
